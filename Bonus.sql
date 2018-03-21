@@ -40,7 +40,7 @@ INSERT INTO `Comments` (`commentId`, `text`, `date`, `newsId`) VALUES
 (17, 'Komentaras 2 straipsniui 3', '2017-03-06', 3),
 (18, 'Komentaras 2 straipsniui 4', '2017-03-16', 4),
 (19, 'Komentaras 2 straipsniui 5', '2017-03-15', 5),
-(20, 'Komentaras 5 straipsniui 6', '2017-03-08', 6),
+(20, 'Komentaras 2 straipsniui 6', '2017-03-08', 6),
 (21, 'Komentaras 2 straipsniui 7', '2017-03-28', 7),
 (22, 'Komentaras 2 straipsniui 8', '2017-03-03', 8),
 (23, 'Komentaras 2 straipsniui 9', '2017-03-22', 9),
@@ -67,4 +67,4 @@ INSERT INTO `News` (`newsId`, `text`, `date`) VALUES
 (14, 'Straipsnis 11', '2017-02-06');
 
 -- Išgauname naujausius 10 straipsnių su paskutiniu parašytu komentaru
-SELECT `n`.*, `c`.`text` AS lastComment, `c`.`date` AS commentDate FROM `News` `n` INNER JOIN `Comments` `c` ON (`n`.`newsId` = `c`.`newsId` AND `c`.`date` = (SELECT MAX(`date`) FROM `Comments` WHERE `newsId` = `c`.`newsId` ORDER BY `commentId` DESC)) ORDER BY `n`.`date` DESC LIMIT 10;
+SELECT `n`.*, `c`.`text` AS lastComment, `c`.`date` AS commentDate FROM `News` `n` INNER JOIN `Comments` `c` ON (`n`.`newsId` = `c`.`newsId` AND `c`.`date` = (SELECT MAX(`date`) FROM `Comments` WHERE `newsId` = `c`.`newsId`)) ORDER BY `n`.`date` DESC LIMIT 10;
