@@ -11,10 +11,14 @@ INSERT INTO `AuthorsBooks` (`bookId`, `authorId`) SELECT `bookId`, `authorId` FR
 ALTER TABLE `Books` DROP `authorId`;
 INSERT INTO `AuthorsBooks` (`bookId`, `authorId`) VALUES(2, 3);
 INSERT INTO `AuthorsBooks` (`bookId`, `authorId`) VALUES(2, 5);
--- 7.3
+/*
+7.3
+Sujungiame rezultatus kableliu naudodami GROUP_CONCAT() funkciją
+*/
 SELECT `b`.*, GROUP_CONCAT(`a`.`name`) AS authors FROM `Books` `b` INNER JOIN `AuthorsBooks` `ab` ON `b`.`bookId` = `ab`.`bookId` INNER JOIN `Authors` `a` ON `ab`.`authorId` = `a`.`authorId` GROUP BY `b`.`bookId`;
 /*
 7.4
 Keičiam lentelės bei stulpelio charset'ą
 */
 ALTER TABLE `Books` CHARACTER SET utf8, MODIFY `title` VARCHAR(255) CHARACTER SET utf8 NOT NULL;
+INSERT INTO `Books` (`title`, `year`) VALUES ('Gerų receptų knyga', 2015);
